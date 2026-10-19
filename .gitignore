@@ -9,10 +9,20 @@ dist/
 .edgeone/
 .edgeone.zip
 
-# Environment variables
+# Environment variables — NEVER commit real secrets
+# Keep .env.example tracked as the template (it must contain placeholders only).
 .env
+.env.*
+!.env.example
+*.env
 agents-python/.env
 agents-python/chat/.env
+
+# Secret-ish files
+*.pem
+*.key
+secrets.json
+credentials.json
 
 # OS
 .DS_Store
