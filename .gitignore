@@ -39,3 +39,6 @@ plan/
 # AI assistant local instructions
 CLAUDE.md
 AGENTS.md
+
+# WorkBuddy local workspace data
+.workbuddy/
