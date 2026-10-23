@@ -20,13 +20,25 @@
 from __future__ import annotations
 
 import argparse
+import importlib.util
 import os
-import sys
 
-# 让脚本可以直接从仓库根目录运行
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+_here = os.path.dirname(os.path.abspath(__file__))
 
-from agents._map_tools import AmapError, geocode, recommend_malls  # noqa: E402
+# 注意：这里不能写成 `from agents._map_tools import ...`。
+# 安装 openai-agents 后，SDK 的顶层包名同样叫 `agents`，会顶掉本仓库的
+# agents/ 目录（该目录没有 __init__.py —— 它是 EdgeOne Makers 按文件路径加载的
+# 函数目录，内部用 `from .._logger import` 做相对导入，不能改成常规包）。
+# 因此改为按文件路径显式加载，绕开重名冲突。
+_spec = importlib.util.spec_from_file_location(
+    "_map_tools", os.path.join(_here, "agents", "_map_tools.py")
+)
+_map_tools = importlib.util.module_from_spec(_spec)
+_spec.loader.exec_module(_map_tools)
+
+AmapError = _map_tools.AmapError
+geocode = _map_tools.geocode
+recommend_malls = _map_tools.recommend_malls
 
 
 def print_header(text: str) -> None:
