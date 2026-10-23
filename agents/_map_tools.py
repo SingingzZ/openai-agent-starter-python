@@ -240,6 +240,88 @@ def geocode(place: str, city: str = "") -> dict:
     }
 
 
+def _strip_paren(text: str) -> str:
+    """去掉中英文括号及其中的分店名，留下主干词。"""
+    out: list[str] = []
+    depth = 0
+    for ch in text or "":
+        if ch in "(（":
+            depth += 1
+        elif ch in ")）":
+            depth = max(depth - 1, 0)
+        elif depth == 0:
+            out.append(ch)
+    return "".join(out).strip()
+
+
+def _same_place(query: str, name: str) -> bool:
+    """检索词与 POI 名称是否指同一个地方（容忍括号差异）。"""
+    forms_q = {(query or "").strip(), _strip_paren(query)}
+    forms_n = {(name or "").strip(), _strip_paren(name)}
+    for fq in forms_q:
+        if len(fq) < 2:
+            continue
+        for fn in forms_n:
+            if len(fn) < 2:
+                continue
+            if fq in fn or fn in fq:
+                return True
+    return False
+
+
+def resolve_location(place: str, city: str = "") -> dict:
+    """
+    把「地点描述」解析成坐标 —— 同时适配门店名、商场名、地名和地址。
+
+    为什么不能只用 geocode：
+        geocode/geo 是按**地址**解析的。拿「喜茶(深圳北缤果空间店)」这种店名
+        去查，连锁店会被解析到城市里同名却不同分店的坐标 —— 实测从深圳北站
+        出发的喜茶被算到福田平安金融中心，路程从 0.8 公里变成 15.7 公里。
+
+    解析顺序：
+        1. 输入本身是坐标 → 直接使用；
+        2. POI 搜索 place/text → 命中名称一致的 POI 就采用（店名/商场名走这条路）；
+        3. 兜底 geocode/geo（纯路名、门牌号更适合地址型描述）。
+    """
+    direct = parse_lnglat(place)
+    if direct:
+        return {
+            "location": direct,
+            "formatted_address": place,
+            "city": city,
+            "district": "",
+            "level": "坐标",
+        }
+
+    params: dict[str, Any] = {
+        "keywords": place,
+        "offset": 10,
+        "page": 1,
+        "extensions": "base",
+    }
+    if city:
+        params["city"] = city
+    try:
+        data = _amap_get("place/text", **params)
+    except AmapError:
+        data = None
+
+    for raw in (data or {}).get("pois") or []:
+        poi = _poi(raw)
+        if not poi["location"]:
+            continue
+        if _same_place(place, poi["name"]):
+            return {
+                "location": poi["location"],
+                "formatted_address": poi["address"] or poi["name"],
+                "city": poi["city"] or city,
+                "district": poi["district"] or "",
+                "level": poi["type"] or "兴趣点",
+            }
+
+    return geocode(place, city)
+
+
 # ---------------------------------------------------------------------------
 # 搜索
 # ---------------------------------------------------------------------------

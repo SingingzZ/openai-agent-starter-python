@@ -22,6 +22,7 @@ from ._map_tools import (
     normalize_mode,
     recommend_malls,
     resolve_brand,
+    resolve_location,
     route,
     search_malls,
 )
@@ -165,8 +166,10 @@ def plan_route(
     """规划从出发地到目的地的路线，给出距离与预计耗时。"""
     mode = normalize_mode(travel_mode)
     try:
-        start = geocode(origin, city)
-        end = geocode(destination, start["city"] or city)
+        # 用 resolve_location 而不是 geocode：目的地常常是门店名，
+        # geocode 按地址解析，会把连锁店错配到同城其它分店（实测过一次）。
+        start = resolve_location(origin, city)
+        end = resolve_location(destination, start["city"] or city)
         trip = route(start["location"], end["location"], mode, start["city"] or city)
     except AmapError as exc:
         return _json({"ok": False, "error": str(exc)})
