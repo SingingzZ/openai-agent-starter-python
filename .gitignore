@@ -56,3 +56,13 @@ AGENTS.md
 # Network-audit client (WFP filter) writes logs to cwd using an
 # unexpanded "%public%" path, littering the repo. Ignore it.
 %public%/
+
+# Local dev runtime artifacts (dev_server.py writes conversation memory here)
+.dev_sessions.db
+.dev_sessions.db-journal
+.dev_sessions.db-shm
+.dev_sessions.db-wal
+dev_server.log
+dev_server.err.log
+vite.log
+vite.err.log
