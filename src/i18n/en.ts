@@ -34,6 +34,9 @@ const en = {
   "debug.clear": "Clear",
   "debug.empty": "Waiting for SSE events...",
   "debug.emptyHint": "After sending a message, all raw backend data will be displayed here.",
+  "debug.expand": "Expand",
+  "debug.collapse": "Collapse",
+  "debug.live": "LIVE",
 
   // Conversation sidebar
   "sidebar.label": "Conversation list",

@@ -111,7 +111,8 @@ function AppInner() {
   const [loading, setLoading]   = useState(false);
   const [historyLoading, setHistoryLoading] = useState(true);
   const [debugEvents, setDebugEvents] = useState<RawSseEvent[]>([]);
-  const [rightPanelMode, setRightPanelMode] = useState<'code' | 'debug'>('code');
+  /** 传输流抽屉默认收起 —— 只在用户点击状态栏时才展开。 */
+  const [streamOpen, setStreamOpen] = useState(false);
 
   // Conversation list (sidebar) state
   const [conversations, setConversations] = useState<ConversationSummary[]>([]);
@@ -291,7 +292,6 @@ function AppInner() {
 
   const handleSend = useCallback(async (text: string) => {
     initDoneRef.current = true;
-    setRightPanelMode('debug');
 
     const userMsg: Message = {
       id: crypto.randomUUID(),
@@ -384,7 +384,6 @@ function AppInner() {
         // hundreds of one-token rows.
         if (event.eventType === 'text_delta') {
           const delta = (event.data as { delta?: string } | null)?.delta ?? '';
-          setRightPanelMode('debug');
           setDebugEvents(prev => {
             const last = prev[prev.length - 1];
             if (last && last.eventType === 'text_delta') {
@@ -401,7 +400,6 @@ function AppInner() {
           });
           return;
         }
-        setRightPanelMode('debug');
         setDebugEvents(prev => [...prev, event]);
       },
 
@@ -463,7 +461,7 @@ function AppInner() {
     setActiveConversationId(newId);
     setMessages([]);
     setDebugEvents([]);
-    setRightPanelMode('code');
+    setStreamOpen(false);
     setLoading(false);
     initDoneRef.current = false;
   }, [refreshConversations]);
@@ -495,7 +493,7 @@ function AppInner() {
     localStorage.setItem(CONVERSATION_ID_STORAGE_KEY, id);
     conversationIdRef.current = id;
     setActiveConversationId(id);
-    setRightPanelMode('code');
+    setStreamOpen(false);
     void loadConversation(id);
   }, [loading, loadConversation]);
 
@@ -509,7 +507,7 @@ function AppInner() {
     setActiveConversationId(newId);
     setMessages([]);
     setDebugEvents([]);
-    setRightPanelMode('code');
+    setStreamOpen(false);
     initDoneRef.current = false;
     setHistoryLoading(false);
   }, [loading]);
@@ -545,7 +543,7 @@ function AppInner() {
       setActiveConversationId(newId);
       setMessages([]);
       setDebugEvents([]);
-      setRightPanelMode('code');
+      setStreamOpen(false);
       initDoneRef.current = false;
       setHistoryLoading(false);
     }
@@ -603,11 +601,16 @@ function AppInner() {
         </div>
 
         <div className={styles.codePanel}>
-          {rightPanelMode === 'code' ? (
+          <div className={styles.codeTop}>
             <CodeViewer />
-          ) : (
-            <DebugPanel events={debugEvents} onClear={() => setDebugEvents([])} />
-          )}
+          </div>
+          <DebugPanel
+            events={debugEvents}
+            onClear={() => setDebugEvents([])}
+            collapsed={!streamOpen}
+            onToggle={() => setStreamOpen(v => !v)}
+            streaming={loading}
+          />
         </div>
       </div>
       <GitHubLink />

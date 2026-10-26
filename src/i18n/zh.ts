@@ -34,6 +34,9 @@ const zh = {
   "debug.clear": "清除",
   "debug.empty": "等待 SSE 事件...",
   "debug.emptyHint": "发送消息后，所有原始后端数据将在此处显示。",
+  "debug.expand": "展开",
+  "debug.collapse": "收起",
+  "debug.live": "实时",
 
   // Conversation sidebar
   "sidebar.label": "会话列表",

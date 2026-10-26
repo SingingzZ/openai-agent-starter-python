@@ -7,7 +7,6 @@
   flex-direction: column;
   height: 100%;
   background: #0c0b08;
-  border-left: 1px solid #2a2416;
   position: relative;
   overflow: hidden;
   /* Subtle warm ambient light on the right edge */

@@ -130,6 +130,19 @@
   border-left: 1px solid rgba(255, 255, 255, 0.06);
 }
 
+/* 代码区占满剩余空间，传输流抽屉贴底 */
+.codeTop {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  overflow: hidden;
+}
+
+.codeTop > * {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
 @media (max-width: 1100px) {
   .codePanel { flex: 0 0 36%; }
 }
