@@ -7,7 +7,7 @@
   gap: 16px;
 }
 
-/* Empty state */
+/* Empty state — 农场告示牌 */
 .empty {
   flex: 1;
   display: flex;
@@ -20,45 +20,79 @@
 }
 
 .emptyIconWrap {
-  width: 86px;
-  height: 86px;
-  border-radius: 26px;
+  width: 88px;
+  height: 88px;
+  border-radius: 18px;
   display: grid;
   place-items: center;
-  background: linear-gradient(135deg, rgba(78, 224, 200, 0.18), rgba(79, 140, 255, 0.16));
-  border: 1px solid rgba(78, 224, 200, 0.3);
-  box-shadow:
-    0 0 44px rgba(78, 224, 200, 0.18),
-    0 1px 0 rgba(255, 255, 255, 0.08) inset;
+  background: var(--sv-cream);
+  border: 3px solid var(--sv-outline);
+  box-shadow: 0 6px 0 var(--sv-outline), inset 0 4px 0 rgba(255,255,255,.6);
   animation: floaty 4.5s ease-in-out infinite;
 }
 
 .emptyIcon {
-  font-size: 2.3rem;
-  color: var(--brand-1);
+  font-size: 2.6rem;
   line-height: 1;
-  filter: drop-shadow(0 0 14px rgba(78, 224, 200, 0.55));
 }
 
 .emptyTitle {
   font-family: var(--font-display);
-  font-size: 1.28rem;
-  font-weight: 700;
-  letter-spacing: .08em;
-  background: var(--grad-brand);
-  -webkit-background-clip: text;
-          background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-transform: uppercase;
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: .14em;
+  color: var(--sv-cream);
+  text-shadow:
+    0 3px 0 var(--sv-outline),
+    2px 0 0 var(--sv-outline),
+    -2px 0 0 var(--sv-outline),
+    0 -2px 0 var(--sv-outline);
 }
 
 .emptyHint {
-  font-size: .78rem;
+  font-size: .8rem;
   color: var(--text-secondary);
   letter-spacing: .04em;
-  max-width: 420px;
+  max-width: 440px;
   text-align: center;
   line-height: 1.7;
+}
+
+/* 四季图标：参考星露谷季节选择卡 */
+.emptySeasons {
+  display: flex;
+  gap: 12px;
+  margin-top: 6px;
+}
+
+.emptySeasons span {
+  width: 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  font-size: 1.5rem;
+  border-radius: 10px;
+  background: var(--sv-cream);
+  border: 3px solid var(--sv-outline);
+  box-shadow: 0 4px 0 var(--sv-outline), inset 0 3px 0 rgba(255,255,255,.55);
+  animation: seasonHop 2.8s ease-in-out infinite;
+  cursor: default;
+  transition: transform .16s ease;
+}
+.emptySeasons span:hover {
+  transform: translateY(-5px) rotate(-4deg);
+}
+
+/* 每个季节不同底色 + 错开的弹跳节奏 */
+.seasonPink   { background: var(--sv-pink)  !important; animation-delay: 0s   !important; }
+.seasonGold   { background: var(--sv-gold)  !important; animation-delay: .35s !important; }
+.seasonOrange { background: #d97a2b         !important; animation-delay: .7s  !important; }
+.seasonBlue   { background: var(--sv-blue)  !important; animation-delay: 1.05s !important; }
+
+@keyframes seasonHop {
+  0%, 100% { transform: translateY(0); }
+  12%      { transform: translateY(-7px) rotate(-3deg); }
+  24%      { transform: translateY(0); }
 }
 
 .emptyFeatures {
@@ -66,13 +100,14 @@
   align-items: center;
   gap: 6px;
   margin-top: 6px;
-  padding: 7px 14px;
-  border-radius: 999px;
-  border: 1px solid rgba(78, 224, 200, 0.26);
-  background: rgba(78, 224, 200, 0.08);
-  font-size: .68rem;
-  color: var(--brand-1);
-  letter-spacing: .06em;
+  padding: 7px 16px;
+  border-radius: 8px;
+  border: 2px solid var(--sv-outline);
+  background: rgba(247, 240, 216, 0.12);
+  box-shadow: 0 3px 0 rgba(20, 12, 6, 0.6);
+  font-size: .7rem;
+  color: var(--sv-cream);
+  letter-spacing: .08em;
 }
 
 /* Typing indicator */
@@ -83,38 +118,38 @@
   animation: fadeUp .25s ease both;
 }
 .avatar {
-  width: 30px;
-  height: 30px;
-  border-radius: 11px;
-  background: linear-gradient(135deg, rgba(78, 224, 200, 0.18), rgba(79, 140, 255, 0.18));
-  border: 1px solid rgba(78, 224, 200, 0.3);
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  background: var(--sv-cream);
+  border: 2px solid var(--sv-outline);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: .85rem;
-  color: var(--brand-1);
+  font-size: 1rem;
   flex-shrink: 0;
+  box-shadow: 0 3px 0 var(--sv-outline);
 }
 .typing {
   display: flex;
   align-items: center;
   gap: 5px;
   padding: 12px 16px;
-  background: var(--bot-bubble);
-  border: 1px solid var(--bot-border);
+  background: var(--sv-cream);
+  border: 2px solid var(--sv-outline);
   border-radius: var(--radius-md) var(--radius-md) var(--radius-md) 6px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
+  box-shadow: 0 4px 0 var(--sv-outline);
 }
 .typing span {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--brand-1);
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  background: var(--sv-green);
   display: block;
   animation: typingBounce 1.2s ease-in-out infinite;
 }
-.typing span:nth-child(2) { animation-delay: .15s; }
-.typing span:nth-child(3) { animation-delay: .30s; }
+.typing span:nth-child(2) { animation-delay: .15s; background: var(--sv-gold); }
+.typing span:nth-child(3) { animation-delay: .30s; background: var(--sv-pink); }
 
 @keyframes typingBounce {
   0%, 80%, 100% { transform: translateY(0); opacity: .35; }
@@ -125,10 +160,10 @@
   to   { opacity: 1; transform: translateY(0); }
 }
 @keyframes floaty {
-  0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(-7px); }
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  50%      { transform: translateY(-7px) rotate(2deg); }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .emptyIconWrap { animation: none; }
+  .emptyIconWrap, .emptySeasons span { animation: none; }
 }

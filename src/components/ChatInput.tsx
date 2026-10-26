@@ -55,7 +55,7 @@ export default function ChatInput({ onSend, onStop, onClear, disabled }: Props) 
             onClick={() => handlePreset(t(key as MessageKeys))}
             disabled={disabled}
           >
-            {t(key as MessageKeys)}
+            <span aria-hidden="true">✦ </span>{t(key as MessageKeys)}
           </button>
         ))}
       </div>

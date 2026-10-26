@@ -16,7 +16,6 @@ import ToolIndicators from './components/ToolIndicators';
 import ChatWindow from './components/ChatWindow';
 import ChatInput from './components/ChatInput';
 import DebugPanel from './components/DebugPanel';
-import CodeViewer from './components/CodeViewer';
 import ConversationSidebar from './components/ConversationSidebar';
 import GitHubLink from './components/GitHubLink';
 import DeployLink from './components/DeployLink';
@@ -580,7 +579,7 @@ function AppInner() {
         <div className={styles.chatPanel}>
           <header className={styles.header}>
             <div className={styles.headerLeft}>
-              <span className={styles.logo}>⬡</span>
+              <span className={styles.logo}>🌞</span>
               <div>
                 <p className={styles.title}>{t("app.title")}</p>
                 <p className={styles.subtitle}>{t("app.subtitle")}</p>
@@ -598,12 +597,8 @@ function AppInner() {
             )}
           </div>
           <ChatInput onSend={handleSend} onStop={handleStop} onClear={handleClearHistory} disabled={loading} />
-        </div>
 
-        <div className={styles.codePanel}>
-          <div className={styles.codeTop}>
-            <CodeViewer />
-          </div>
+          {/* 传输流：贴底折叠抽屉，点击状态栏展开 */}
           <DebugPanel
             events={debugEvents}
             onClear={() => setDebugEvents([])}

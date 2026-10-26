@@ -1,15 +1,15 @@
 const en = {
   // Header
   "app.title": "Trip Decision Assistant",
-  "app.subtitle": "Tell me where you are, I'll find the mall worth going to",
+  "app.subtitle": "🌾 Tell me where you are, I'll find the mall worth going to",
 
   // Empty state
-  "empty.title": "Trip Decision Assistant",
+  "empty.title": "✦ Trip Farm Is Open ✦",
   "empty.hint": "Tell me your location and the shops you want. I search live AMap POI data to find the nearest mall that has all of them, with distance, travel time and floor info.",
-  "empty.features": "AMap POI · Typo Correction · Route Planning",
+  "empty.features": "🗺️ AMap POI · ✏️ Typo Correction · 🧭 Route Planning",
 
   // Chat input
-  "chat.placeholder": "Type a message...  ⏎ Send · Shift+⏎ Newline",
+  "chat.placeholder": "🌱 Plant your question...  ⏎ Send · Shift+⏎ Newline",
   "chat.hint": "Powered by OpenAI Agents SDK + EdgeOne Makers · Data from AMap",
 
   // Preset questions

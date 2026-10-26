@@ -1,15 +1,15 @@
 const zh = {
   // Header
   "app.title": "出行决策助手",
-  "app.subtitle": "告诉我你在哪，帮你找出最值得去的商场",
+  "app.subtitle": "🌾 告诉我你在哪，帮你找出最值得去的商场",
 
   // Empty state
-  "empty.title": "出行决策助手",
+  "empty.title": "✦ 出行农场开张啦 ✦",
   "empty.hint": "告诉我你现在的位置和想逛的店，我会基于高德地图的实时数据，找出同时满足要求、离你最近的商场，并给出距离、耗时与店铺楼层。",
-  "empty.features": "高德地图 POI · 错别字纠错 · 路径规划",
+  "empty.features": "🗺️ 高德 POI · ✏️ 错别字纠错 · 🧭 路径规划",
 
   // Chat input
-  "chat.placeholder": "发消息…  ⏎ 发送 · Shift+⏎ 换行",
+  "chat.placeholder": "🌱 种下你的问题…  ⏎ 发送 · Shift+⏎ 换行",
   "chat.hint": "由 OpenAI Agents SDK + EdgeOne Makers 驱动 · 数据来自高德地图",
 
   // Preset questions

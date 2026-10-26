@@ -34,12 +34,18 @@ export default function ChatWindow({ messages, loading }: Props) {
       {messages.length === 0 && (
         <div className={styles.empty}>
           <div className={styles.emptyIconWrap}>
-            <span className={styles.emptyIcon}>⬡</span>
+            <span className={styles.emptyIcon}>🌱</span>
           </div>
           <p className={styles.emptyTitle}>{t("empty.title")}</p>
           <p className={styles.emptyHint}>
             {t("empty.hint")}
           </p>
+          <div className={styles.emptySeasons}>
+            <span className={styles.seasonPink}>🌱</span>
+            <span className={styles.seasonGold}>☀️</span>
+            <span className={styles.seasonOrange}>🍂</span>
+            <span className={styles.seasonBlue}>❄️</span>
+          </div>
           <p className={styles.emptyFeatures}>
             {t("empty.features")}
           </p>
@@ -52,7 +58,7 @@ export default function ChatWindow({ messages, loading }: Props) {
 
       {showTypingIndicator && (
         <div className={styles.typingRow}>
-          <div className={styles.avatar}>⬡</div>
+          <div className={styles.avatar}>🌱</div>
           <div className={styles.typing}>
             <span />
             <span />

@@ -72,7 +72,7 @@ export default memo(function ChatBubble({ message }: Props) {
 
   return (
     <div className={`${styles.row} ${isUser ? styles.userRow : styles.botRow}`}>
-      {!isUser && <div className={styles.avatar}>⬡</div>}
+      {!isUser && <div className={styles.avatar}>🧑‍🌾</div>}
       <div className={`${styles.bubble} ${isUser ? styles.userBubble : styles.botBubble}`}>
         {isUser ? (
           message.content
@@ -85,7 +85,7 @@ export default memo(function ChatBubble({ message }: Props) {
           {new Date(message.timestamp).toLocaleTimeString(lang === 'zh' ? 'zh-CN' : 'en-US', { hour: '2-digit', minute: '2-digit' })}
         </span>
       </div>
-      {isUser && <div className={`${styles.avatar} ${styles.userAvatar}`}>U</div>}
+      {isUser && <div className={`${styles.avatar} ${styles.userAvatar}`}>🙂</div>}
     </div>
   );
 });

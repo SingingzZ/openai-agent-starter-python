@@ -93,7 +93,7 @@ export default function ConversationSidebar({
     <aside className={styles.sidebar} aria-label={t('sidebar.label')}>
       <div className={styles.head}>
         <span className={styles.brand}>
-          <span className={styles.brandDot}>⬡</span>
+          <span className={styles.brandDot}>🌱</span>
           {t('sidebar.title')}
         </span>
         <button

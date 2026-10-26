@@ -5,42 +5,56 @@
 }
 
 :root {
-  /* ── 底色：深蓝夜航 ───────────────────────────── */
-  --bg-base: #060a14;
-  --bg-surface: #0b1220;
-  --bg-elevated: #111a2e;
-  --bg-border: #1f2c47;
+  /* ── 星露谷 · 夜空农场色板 ─────────────────────── */
+  --bg-base: #1b1b3a;
+  --bg-surface: #241f4a;
+  --bg-elevated: #2d2558;
+  --bg-border: #4a3d78;
 
-  --text-primary: #e9effc;
-  --text-secondary: #90a4c8;
-  --text-muted: #56668c;
+  --text-primary: #fdf6e3;       /* 米白（星露谷 UI 文字色） */
+  --text-secondary: #c9bfe8;
+  --text-muted: #8d82b8;
 
-  /* ── 品牌渐变：青绿 → 蓝（导航 / 地图气质） ──── */
-  --brand-1: #4ee0c8;
-  --brand-2: #4f8cff;
-  --grad-brand: linear-gradient(135deg, var(--brand-1) 0%, var(--brand-2) 100%);
+  /* 木质 UI */
+  --sv-wood: #a86b32;
+  --sv-wood-dark: #6b4423;
+  --sv-wood-light: #d9a05b;
+  --sv-outline: #3d2814;         /* 深棕描边 */
+  --sv-cream: #f7f0d8;           /* 米白卡片 */
+  --sv-cream-dark: #e8dcb8;
+  --sv-ink: #4a3520;             /* 米白卡上的深棕文字 */
 
-  /* 兼容组件里既有的强调色变量名，改色即可全局生效 */
-  --accent-gold: var(--brand-1);
-  --accent-gold-dim: rgba(78, 224, 200, 0.14);
-  --accent-gold-glow: rgba(78, 224, 200, 0.45);
+  /* 季节/功能强调色 */
+  --sv-pink: #e85a71;
+  --sv-pink-dark: #c74358;
+  --sv-green: #59b04b;
+  --sv-green-dark: #3e8234;
+  --sv-blue: #4a90d9;
+  --sv-gold: #f2b632;
 
-  /* ── 气泡 ─────────────────────────────────────── */
-  --user-bubble: linear-gradient(135deg, #43d6bd 0%, #4f8cff 100%);
-  --user-border: rgba(78, 224, 200, 0.28);
-  --bot-bubble: rgba(15, 24, 43, 0.82);
-  --bot-border: #1f2c47;
+  /* 兼容旧变量名：品牌色 → 星露谷绿 */
+  --brand-1: #7ec850;
+  --brand-2: #4a90d9;
+  --grad-brand: linear-gradient(135deg, #7ec850 0%, #4a90d9 100%);
+  --accent-gold: var(--sv-gold);
+  --accent-gold-dim: rgba(242, 182, 50, 0.16);
+  --accent-gold-glow: rgba(242, 182, 50, 0.5);
 
-  --font-display: 'Syne', sans-serif;
-  --font-mono: 'DM Mono', monospace;
+  --user-bubble: linear-gradient(180deg, #ec6a80 0%, #d94f6c 100%);
+  --user-border: #3d2814;
+  --bot-bubble: var(--sv-cream);
+  --bot-border: #3d2814;
 
-  --radius-sm: 8px;
-  --radius-md: 14px;
-  --radius-lg: 20px;
-  --radius-xl: 26px;
+  --font-display: 'Trebuchet MS', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --font-mono: 'Consolas', 'Courier New', monospace;
 
-  --shadow-card: 0 30px 80px rgba(0, 0, 0, 0.55);
-  --shadow-glow: 0 10px 30px rgba(78, 224, 200, 0.22);
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 18px;
+
+  --shadow-card: 0 14px 44px rgba(8, 6, 28, 0.55);
+  --shadow-glow: 0 6px 0 var(--sv-outline);
   --transition-fast: 140ms cubic-bezier(.4, 0, .2, 1);
   --transition-med: 280ms cubic-bezier(.4, 0, .2, 1);
 }
@@ -49,20 +63,20 @@ html, body, #root {
   height: 100%;
   width: 100%;
   color: var(--text-primary);
-  font-family: var(--font-mono);
+  font-family: var(--font-display);
   -webkit-font-smoothing: antialiased;
   overflow: hidden;
 }
 
+/* ── 夜空渐变（上深紫 → 下暖蓝紫，参考星露谷开场） ── */
 body {
   background:
-    radial-gradient(1100px 680px at 10% -8%,  rgba(78, 224, 200, 0.14), transparent 62%),
-    radial-gradient(900px  620px at 90%  6%,  rgba(79, 140, 255, 0.16), transparent 64%),
-    radial-gradient(1000px 800px at 58% 112%, rgba(124, 84, 255, 0.12), transparent 62%),
-    var(--bg-base);
+    radial-gradient(1200px 500px at 50% -12%, rgba(120, 90, 200, 0.28), transparent 65%),
+    radial-gradient(900px 460px at 12% 12%, rgba(232, 90, 113, 0.10), transparent 60%),
+    linear-gradient(180deg, #141335 0%, #1f1a45 42%, #322a5e 74%, #4a3a6e 100%);
 }
 
-/* 地图网格底纹：极淡的经纬线，边缘柔化 */
+/* 星星：两层错落闪烁的像素点 */
 body::before {
   content: '';
   position: fixed;
@@ -70,30 +84,55 @@ body::before {
   z-index: 0;
   pointer-events: none;
   background-image:
-    linear-gradient(to right,  rgba(255, 255, 255, 0.032) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.032) 1px, transparent 1px);
-  background-size: 48px 48px;
-  -webkit-mask-image: radial-gradient(ellipse at 50% 38%, #000 18%, transparent 76%);
-          mask-image: radial-gradient(ellipse at 50% 38%, #000 18%, transparent 76%);
+    radial-gradient(2px 2px at 8% 18%,   rgba(255,250,230,.9) 50%, transparent 51%),
+    radial-gradient(2px 2px at 24% 42%,  rgba(255,250,230,.55) 50%, transparent 51%),
+    radial-gradient(3px 3px at 38% 10%,  rgba(255,250,230,.75) 50%, transparent 51%),
+    radial-gradient(2px 2px at 55% 26%,  rgba(255,250,230,.5) 50%, transparent 51%),
+    radial-gradient(2px 2px at 68% 8%,   rgba(255,250,230,.85) 50%, transparent 51%),
+    radial-gradient(3px 3px at 81% 32%,  rgba(255,250,230,.6) 50%, transparent 51%),
+    radial-gradient(2px 2px at 92% 15%,  rgba(255,250,230,.8) 50%, transparent 51%),
+    radial-gradient(2px 2px at 15% 62%,  rgba(255,250,230,.4) 50%, transparent 51%),
+    radial-gradient(2px 2px at 47% 55%,  rgba(255,250,230,.45) 50%, transparent 51%),
+    radial-gradient(3px 3px at 87% 66%,  rgba(255,250,230,.5) 50%, transparent 51%),
+    radial-gradient(2px 2px at 33% 82%,  rgba(255,250,230,.4) 50%, transparent 51%),
+    radial-gradient(2px 2px at 64% 88%,  rgba(255,250,230,.45) 50%, transparent 51%);
+  animation: starTwinkle 3.6s ease-in-out infinite alternate;
+}
+
+@keyframes starTwinkle {
+  0%   { opacity: .55; }
+  50%  { opacity: 1; }
+  100% { opacity: .65; }
+}
+
+/* 底部草地剪影条，压住星空 */
+body::after {
+  content: '';
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  height: 64px;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, transparent 0%, rgba(52, 92, 46, 0.5) 46%, rgba(38, 70, 36, 0.72) 100%);
 }
 
 ::selection {
-  background: rgba(78, 224, 200, 0.28);
+  background: rgba(232, 90, 113, 0.4);
   color: #fff;
 }
 
-/* scrollbar */
-::-webkit-scrollbar { width: 6px; height: 6px; }
-::-webkit-scrollbar-track { background: transparent; }
+/* scrollbar — 木质滚动条 */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: rgba(61, 40, 20, 0.25); }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, rgba(78, 224, 200, 0.35), rgba(79, 140, 255, 0.35));
-  border-radius: 999px;
+  background: var(--sv-wood);
+  border: 2px solid var(--sv-outline);
+  border-radius: 4px;
 }
-::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, rgba(78, 224, 200, 0.6), rgba(79, 140, 255, 0.6));
-}
+::-webkit-scrollbar-thumb:hover { background: var(--sv-wood-light); }
 
-/* Language toggle */
+/* Language toggle — 星露谷小木牌 */
 .lang-toggle {
   position: fixed;
   top: 14px;
@@ -102,51 +141,47 @@ body::before {
   display: flex;
   align-items: center;
   gap: 2px;
-  padding: 6px 14px;
-  border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  padding: 7px 14px;
+  border-radius: 8px;
+  border: 2px solid var(--sv-outline);
+  background: var(--sv-cream);
+  box-shadow: 0 4px 0 var(--sv-outline);
   cursor: pointer;
-  transition: background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  transition: transform .14s ease, box-shadow .14s ease;
   line-height: 1;
 }
 .lang-toggle:hover {
-  background: rgba(255, 255, 255, 0.09);
-  border-color: rgba(78, 224, 200, 0.35);
-  box-shadow: 0 0 22px rgba(78, 224, 200, 0.18);
+  transform: translateY(-2px) rotate(-1deg);
+  box-shadow: 0 6px 0 var(--sv-outline);
 }
 .lang-toggle:active {
-  transform: scale(0.96);
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 var(--sv-outline);
 }
 .lang-toggle__label {
   display: inline-block;
-  font-family: var(--font-mono);
+  font-family: var(--font-display);
   font-size: 12px;
-  font-weight: 400;
-  color: var(--text-muted);
+  font-weight: 700;
+  color: var(--sv-ink);
   transition: font-size 0.35s cubic-bezier(.4, 0, .2, 1),
               color 0.35s cubic-bezier(.4, 0, .2, 1),
-              font-weight 0.35s cubic-bezier(.4, 0, .2, 1),
-              transform 0.35s cubic-bezier(.4, 0, .2, 1),
-              text-shadow 0.35s ease;
+              transform 0.35s cubic-bezier(.4, 0, .2, 1);
   transform: scale(0.9);
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  opacity: .55;
 }
 .lang-toggle__label--active {
   font-size: 14px;
-  font-weight: 700;
-  color: var(--brand-1);
+  font-weight: 800;
+  color: var(--sv-pink-dark);
   transform: scale(1);
-  text-shadow: 0 0 12px rgba(78, 224, 200, 0.5);
+  opacity: 1;
 }
 .lang-toggle__sep {
-  font-family: var(--font-mono);
   font-size: 11px;
-  color: var(--text-muted);
+  color: var(--sv-outline);
   opacity: 0.4;
   margin: 0 3px;
   user-select: none;
