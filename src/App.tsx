@@ -563,6 +563,7 @@ function AppInner() {
     <div className={styles.shell}>
       <div className={styles.blob1} />
       <div className={styles.blob2} />
+      <div className={styles.blob3} />
 
       <div className={styles.stage}>
         <ConversationSidebar

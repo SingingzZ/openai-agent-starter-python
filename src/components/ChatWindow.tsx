@@ -33,7 +33,9 @@ export default function ChatWindow({ messages, loading }: Props) {
     <div ref={windowRef} className={styles.window}>
       {messages.length === 0 && (
         <div className={styles.empty}>
-          <span className={styles.emptyIcon}>⬡</span>
+          <div className={styles.emptyIconWrap}>
+            <span className={styles.emptyIcon}>⬡</span>
+          </div>
           <p className={styles.emptyTitle}>{t("empty.title")}</p>
           <p className={styles.emptyHint}>
             {t("empty.hint")}

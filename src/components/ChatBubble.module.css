@@ -2,7 +2,7 @@
   display: flex;
   align-items: flex-end;
   gap: 10px;
-  animation: fadeUp .25s ease both;
+  animation: fadeUp .28s cubic-bezier(.22, 1, .36, 1) both;
   max-width: 100%;
 }
 .botRow  { justify-content: flex-start; }
@@ -11,65 +11,88 @@
 .avatar {
   width: 30px;
   height: 30px;
-  border-radius: 50%;
-  background: var(--bg-elevated);
-  border: 1px solid var(--bg-border);
+  border-radius: 11px;
+  background: linear-gradient(135deg, rgba(78, 224, 200, 0.18), rgba(79, 140, 255, 0.18));
+  border: 1px solid rgba(78, 224, 200, 0.3);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: .8rem;
-  color: var(--accent-gold);
+  color: var(--brand-1);
   flex-shrink: 0;
   font-family: var(--font-display);
   font-weight: 700;
+  transition: box-shadow var(--transition-fast);
 }
+.botRow:hover .avatar {
+  box-shadow: 0 0 16px rgba(78, 224, 200, 0.28);
+}
+
 .userAvatar {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.09);
   color: var(--text-secondary);
   font-size: .65rem;
 }
 
 .bubble {
   position: relative;
-  max-width: 68%;
-  padding: 12px 16px 24px;
-  border-radius: var(--radius-md);
-  font-size: .82rem;
-  line-height: 1.65;
+  max-width: min(70%, 660px);
+  padding: 12px 16px 26px;
+  border-radius: 18px;
+  font-size: .84rem;
+  line-height: 1.7;
   word-break: break-word;
+  transition: box-shadow var(--transition-med), transform var(--transition-med);
 }
 
 .botBubble {
-  background: var(--bot-bubble);
+  background: linear-gradient(180deg, rgba(20, 30, 52, 0.92), rgba(13, 21, 39, 0.92));
   border: 1px solid var(--bot-border);
   color: var(--text-primary);
-  border-radius: var(--radius-md) var(--radius-md) var(--radius-md) 4px;
+  border-radius: 18px 18px 18px 6px;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+.botBubble:hover {
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.38), 0 0 0 1px rgba(78, 224, 200, 0.12);
 }
 
 .userBubble {
   background: var(--user-bubble);
-  border: 1px solid var(--user-border);
-  color: var(--text-primary);
-  border-radius: var(--radius-md) var(--radius-md) 4px var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: #06121f;
+  font-weight: 500;
+  border-radius: 18px 18px 6px 18px;
   white-space: pre-wrap;
+  box-shadow: 0 12px 28px rgba(79, 140, 255, 0.26);
+}
+.userBubble:hover {
+  box-shadow: 0 16px 34px rgba(79, 140, 255, 0.34);
 }
 
 .time {
   position: absolute;
-  bottom: 6px;
-  right: 12px;
+  bottom: 7px;
+  right: 13px;
   font-size: .6rem;
   color: var(--text-muted);
   letter-spacing: .04em;
+  opacity: .85;
+}
+.userBubble .time {
+  color: rgba(6, 18, 31, 0.55);
 }
 
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(8px); }
+  from { opacity: 0; transform: translateY(10px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
 /* ── Markdown rendered content ── */
 .markdown {
-  line-height: 1.7;
+  line-height: 1.75;
 }
 .markdown :global(p) {
   margin: 0.4em 0;
@@ -101,26 +124,30 @@
 .markdown :global(ul),
 .markdown :global(ol) {
   margin: 0.4em 0;
-  padding-left: 2em;
+  padding-left: 1.6em;
   list-style-position: outside;
 }
 .markdown :global(li) {
   margin: 0.2em 0;
   padding-left: 0.15em;
 }
+.markdown :global(li::marker) {
+  color: var(--brand-1);
+}
 .markdown :global(code) {
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid var(--bg-border);
-  border-radius: 4px;
+  background: rgba(78, 224, 200, 0.08);
+  border: 1px solid rgba(78, 224, 200, 0.18);
+  border-radius: 5px;
   padding: 0.15em 0.4em;
   font-family: var(--font-mono);
   font-size: 0.88em;
+  color: #b9f5ea;
 }
 .markdown :global(pre) {
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.35);
   border: 1px solid var(--bg-border);
-  border-radius: 6px;
-  padding: 10px 14px;
+  border-radius: 10px;
+  padding: 12px 14px;
   overflow-x: auto;
   margin: 0.5em 0;
 }
@@ -129,9 +156,10 @@
   border: none;
   padding: 0;
   font-size: 0.82em;
+  color: var(--text-primary);
 }
 .markdown :global(blockquote) {
-  border-left: 3px solid var(--accent-gold);
+  border-left: 3px solid var(--brand-1);
   padding-left: 12px;
   margin: 0.5em 0;
   color: var(--text-secondary);
@@ -147,7 +175,7 @@
   padding: 0.35em 0.6em;
 }
 .markdown :global(th) {
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(78, 224, 200, 0.07);
   font-weight: 600;
   text-align: left;
 }
@@ -157,7 +185,7 @@
   margin: 0.8em 0;
 }
 .markdown :global(a) {
-  color: var(--accent-gold);
+  color: var(--brand-1);
   text-decoration: underline;
 }
 
@@ -175,8 +203,8 @@
   height: 1.05em;
   margin-left: 3px;
   vertical-align: -0.18em;
-  background: var(--accent-gold);
-  box-shadow: 0 0 8px var(--accent-gold-glow);
+  background: var(--brand-1);
+  box-shadow: 0 0 8px rgba(78, 224, 200, 0.7);
   border-radius: 2px;
   animation: streamingCaretBlink 0.6s ease-in-out infinite;
 }
